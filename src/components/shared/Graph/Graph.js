@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Chart from 'chart.js'
 import styled from 'styled-components'
 
-import { transformDataToCategory, transformDataToTimeSeries } from './GraphUtils'
+import { transformDataToCategory, transformDataToTimeSeries, fillColors } from './GraphUtils'
 
 const Canvas = styled.canvas`
     max-width: 100%;
@@ -28,15 +28,9 @@ const Graph = props => {
     const renderChart = useCallback(() => {
         chartInstance.current = new Chart(node.current, {
             type,
-            data: transformData ? transformData(data) : data,
+            data: fillColors({ type, colors, ...(transformData ? transformData(data) : data)}),
             options
         })
-        console.log(Chart.defaults)
-        // if (Array.isArray(chartInstance.current.config.data.datasets)) {
-        //     chartInstance.current.config.data.datasets[0].backgroundColor = colors
-
-            chartInstance.current.update()
-        // }
     }, [node, type, data, options, transformData, colors])
 
     useEffect(renderChart, [type, data])
@@ -54,9 +48,9 @@ const Graph = props => {
 const Bar = props => {
     return (
         <Graph
-            { ...props }
             transformData={transformDataToCategory}
             type='bar'
+            { ...props }
         />
     )
 }
@@ -64,9 +58,9 @@ const Bar = props => {
 const Line = props => {
     return (
         <Graph
-            { ...props }
             transformData={transformDataToTimeSeries}
             type='line'
+            { ...props }
         />
     )
 }
@@ -74,9 +68,9 @@ const Line = props => {
 const Pie = props => {
     return (
         <Graph
-            { ...props }
             transformData={transformDataToCategory}
             type='pie'
+            { ...props }
         />
     )
 }

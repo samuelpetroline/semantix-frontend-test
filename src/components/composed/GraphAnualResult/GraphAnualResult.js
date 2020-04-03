@@ -25,9 +25,7 @@ const GraphAnualResult = ({ width, height }) => {
                                 width={width}
                                 height={height}
                                 data={data}
-                                options={{
-                                    label: 'hehe'
-                                }}
+                                colors={['rgb(17,138,202)']}
                             />
                         )
                     }
