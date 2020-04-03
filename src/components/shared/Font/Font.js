@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
@@ -8,6 +7,7 @@ const Font = ({ children }) => {
 
 const BaseFontStyle = css`
     font-family: ${props => props.font ? props.font : 'Open Sans'}, sans-serif;
+    color: #4A4A4A;
 `
 
 const Title = styled.h1`
@@ -24,8 +24,13 @@ const Subtitle = styled.h2`
     line-height: 23px;
 `
 
+const Label = styled.label`
+    ${BaseFontStyle}
+`
+
 Font.Title = Title
 Font.Subtitle = Subtitle
+Font.Label = Label
 
 Font.propTypes = {
     children: PropTypes.node.isRequired

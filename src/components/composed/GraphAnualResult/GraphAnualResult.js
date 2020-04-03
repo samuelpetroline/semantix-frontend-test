@@ -25,6 +25,9 @@ const GraphAnualResult = ({ width, height }) => {
                                 width={width}
                                 height={height}
                                 data={data}
+                                options={{
+                                    label: 'hehe'
+                                }}
                             />
                         )
                     }

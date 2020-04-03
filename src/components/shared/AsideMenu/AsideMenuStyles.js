@@ -15,6 +15,11 @@ export const AsideList = styled.ul`
     height: 100%;
 `
 
+export const AsideLogo = styled.img`
+    width: 100%;
+    cursor: default;
+`
+
 export const AsideListItem = styled.li`
         position: relative;
         display: flex;
@@ -48,9 +53,8 @@ export const AsideListItem = styled.li`
 
 export const AsideListItemIcon = styled.i`
         margin-bottom: 10px;
-`
 
-export const AsideLogo = styled.img`
-    width: 100%;
-    cursor: default;
+        ${props => props.active && `
+            fill: #FFF;
+        `}
 `

@@ -1,8 +1,13 @@
 import React, { useRef, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import Chart from 'chart.js'
+import styled from 'styled-components'
 
 import { transformDataToCategory, transformDataToTimeSeries } from './GraphUtils'
+
+const Canvas = styled.canvas`
+    max-width: 100%;
+`
 
 const Graph = props => {
 
@@ -13,6 +18,7 @@ const Graph = props => {
         type,
         data,
         options,
+        colors,
         transformData
     } = props
 
@@ -25,12 +31,18 @@ const Graph = props => {
             data: transformData ? transformData(data) : data,
             options
         })
-    }, [node, type, data, options, transformData])
+        console.log(Chart.defaults)
+        // if (Array.isArray(chartInstance.current.config.data.datasets)) {
+        //     chartInstance.current.config.data.datasets[0].backgroundColor = colors
+
+            chartInstance.current.update()
+        // }
+    }, [node, type, data, options, transformData, colors])
 
     useEffect(renderChart, [type, data])
 
     return (
-        <canvas
+        <Canvas
             id={id}
             ref={node}
             height={height}
@@ -78,8 +90,12 @@ Graph.propTypes = {
     width: PropTypes.string.isRequired,
     height: PropTypes.string.isRequired,
     type: PropTypes.oneOf(['bar', 'line', 'pie']).isRequired,
-    data: PropTypes.object.isRequired,
+    data: PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.object
+    ]).isRequired,
     options: PropTypes.object,
+    colors: PropTypes.array.isRequired,
     transformData: PropTypes.func
 }
 
@@ -89,8 +105,16 @@ Pie.propTypes = {
     id: PropTypes.string.isRequired,
     width: PropTypes.string.isRequired,
     height: PropTypes.string.isRequired,
-    data: PropTypes.array.isRequired,
-    options: PropTypes.object
+    data: PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.object
+    ]).isRequired,
+    options: PropTypes.object,
+    colors: PropTypes.array
+}
+
+Graph.defaultProps = {
+    colors: ['rgb(171,225,250)', 'rgb(17,138,202)', 'rgb(3,90,39)']
 }
 
 export default Graph

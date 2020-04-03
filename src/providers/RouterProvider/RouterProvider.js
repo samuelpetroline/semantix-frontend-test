@@ -5,6 +5,7 @@ import { ROUTES } from 'config/routes'
 
 import Layout from 'views/Layout'
 import MainPage from 'views/MainPage'
+import SubPage from 'views/SubPage'
 
 const RouterProvider = () => {
     return (
@@ -20,7 +21,7 @@ const Routes = () => {
     return (
         <Switch>
             <Route exact path={ROUTES.main} component={MainPage} />
-            <Route exact path={ROUTES.sub} />
+            <Route exact path={ROUTES.sub} component={SubPage} />
             <Route exact path={ROUTES.logout} />
 
             <Redirect to={ROUTES.main} />

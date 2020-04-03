@@ -65,7 +65,7 @@ FetchableData.Empty = Empty
 FetchableData.Success = Success
 
 FetchableData.propTypes = {
-    children: PropTypes.any.isRequired,
+    children: PropTypes.node.isRequired,
     query: PropTypes.func.isRequired
 }
 

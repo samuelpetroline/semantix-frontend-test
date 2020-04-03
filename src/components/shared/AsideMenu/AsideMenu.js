@@ -52,8 +52,8 @@ const AsideItem = ({ href, icon: Icon, children }) => {
     return (
         <AsideListItem active={isActive} onClick={onClick}>
             { Icon &&
-                <AsideListItemIcon>
-                    <Icon width='24px' height='24px' fill={isActive ? '#FFF' : undefined} />
+                <AsideListItemIcon active={isActive}>
+                    <Icon width='24px' height='24px' />
                 </AsideListItemIcon>
             }
             <span>{ children }</span>
